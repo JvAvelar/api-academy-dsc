@@ -1,38 +1,34 @@
 package vitoravelar.academy.controller;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import vitoravelar.academy.dto.UserDTO;
 import vitoravelar.academy.dto.UserUpdateDTO;
 import vitoravelar.academy.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/academy")
-@AllArgsConstructor
+@RequestMapping(path = "/academy/user")
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public List<UserDTO> getAllUser() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{cpf}")
-    public UserDTO getUserByCpf(@PathVariable String cpf) {
-        return Optional.ofNullable(userService.getUserByCpf(cpf))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    @GetMapping("/{name}")
+    public UserDTO getUserByName(@PathVariable String name) {
+        return userService.getUserByName(name);
     }
 
     @GetMapping("/{id}")
-    public Optional<UserDTO> getUserById(@PathVariable Long id) {
-        return Optional.ofNullable(userService.getUserById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
+    public UserDTO getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     @PostMapping
@@ -42,14 +38,13 @@ public class UserController {
     }
 
     @PatchMapping
-    public UserDTO updateUser(@PathVariable String cpf, @RequestBody UserUpdateDTO user) {
-        return Optional.ofNullable(userService.updateUser(cpf, user))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    public UserDTO updateUser(@PathVariable Long id, @RequestBody UserUpdateDTO user) {
+        return userService.updateUser(id, user);
     }
 
-    @DeleteMapping("/{cpf}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable String cpf){
-        userService.deleteUser(cpf);
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
     }
 }

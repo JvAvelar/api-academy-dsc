@@ -1,15 +1,15 @@
 package vitoravelar.academy.model;
 
-import jakarta.annotation.Nonnull;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import vitoravelar.academy.dto.UserDTO;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -19,19 +19,32 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    @Min(value = 1, message = "O id não pode ser menor que 1")
     private Long id;
 
-    @Column(name = "cpf")
-    @NotBlank(message = "O CPF do usuário não pode estar vazio")
+    @Column(name = "cpf", nullable = false, unique = true)
     private String cpf;
 
-    @NotBlank(message = "O nome do usuário não pode estar vazio")
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @NotBlank(message = "A data de pagamento não pode estar vazio")
-    @Column(name = "paymentDate")
-    private String paymentDate;
+    @Column(name = "payment_date", nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate paymentDate;
+
+    @Column(name = "late_payment", nullable = false)
+    private boolean latePayment = false;
+
+    @ManyToOne
+    @Column(name = "academy", nullable = false)
+    private Academy academy;
+
+    public User(UserDTO userDTO) {
+        this.cpf = userDTO.getCpf();
+        this.name = userDTO.getName();
+        this.paymentDate = userDTO.getPaymentDate();
+    }
+
+    public UserDTO toDTO() {
+        return new UserDTO(id, cpf, name, paymentDate);
+    }
 }
