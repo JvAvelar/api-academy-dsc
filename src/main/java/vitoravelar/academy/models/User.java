@@ -1,4 +1,4 @@
-package vitoravelar.academy.model;
+package vitoravelar.academy.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;

@@ -1,20 +1,22 @@
 package vitoravelar.academy.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vitoravelar.academy.dto.UserDTO;
 import vitoravelar.academy.dto.UserUpdateDTO;
-import vitoravelar.academy.model.User;
+import vitoravelar.academy.exceptions.ResourceNotFoundException;
+import vitoravelar.academy.models.User;
 import vitoravelar.academy.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map(User::toDTO).toList();
@@ -22,27 +24,26 @@ public class UserService {
 
     public UserDTO addUser(UserDTO userDTO) {
         User user = new User(userDTO);
+        userRepository.save(user);
         return user.toDTO();
-    }
-
-    public Boolean exists(Long id) {
-        return userRepository.existsById(id);
     }
 
     public UserDTO getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("User not found"))
-                .toDTO();
+                .map( User::toDTO)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
     }
 
     public UserDTO getUserByName(String name) {
-        return userRepository.findByName(name).toDTO();
+        return userRepository.findByName(name)
+                .map( User::toDTO)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with name: " + name));
     }
 
     public UserDTO updateUser(Long id, UserUpdateDTO user) {
-        User oldUser = userRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("User not found"));
+        User oldUser = userRepository.findById(id)
+                .orElseThrow(() ->
+                new ResourceNotFoundException("User not found with id: " + id));
 
         oldUser.setName(user.getName());
         oldUser.setPaymentDate(user.getPaymentDate());
@@ -52,7 +53,7 @@ public class UserService {
 
     public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("User not found"));
+                new ResourceNotFoundException("User not found with id: " + id));
         userRepository.delete(user);
     }
 }

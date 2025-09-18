@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 public class UserDTO {
 
-    @NotNull
+    @NotNull(message = "O id do usuário não pode ser null")
     @Min(value = 1, message = "O id não pode ser menor que 1")
     private Long id;
 
