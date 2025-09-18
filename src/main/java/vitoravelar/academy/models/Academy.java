@@ -1,4 +1,4 @@
-package vitoravelar.academy.model;
+package vitoravelar.academy.models;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,8 @@
-package vitoravelar.academy.model;
+package vitoravelar.academy.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import vitoravelar.academy.dto.EquipmentDTO;
 
 @Getter
 @Setter
@@ -25,4 +26,14 @@ public class Equipment {
     @ManyToOne
     @Column(name = "academy", nullable = false)
     private Academy academy;
+
+    public Equipment(EquipmentDTO equipmentDTO ){
+        this.id = equipmentDTO.getId();
+        this.name = equipmentDTO.getName();
+        this.quantity = equipmentDTO.getQuantity();
+    }
+
+    public EquipmentDTO toDTO(){
+        return new EquipmentDTO(id, name, quantity);
+    }
 }
