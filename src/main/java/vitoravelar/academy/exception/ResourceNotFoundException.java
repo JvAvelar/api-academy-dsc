@@ -1,4 +1,4 @@
-package vitoravelar.academy.exceptions;
+package vitoravelar.academy.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

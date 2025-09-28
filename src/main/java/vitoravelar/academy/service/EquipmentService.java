@@ -3,7 +3,7 @@ package vitoravelar.academy.service;
 import org.springframework.stereotype.Service;
 import vitoravelar.academy.dto.EquipmentDTO;
 import vitoravelar.academy.dto.EquipmentUpdateDTO;
-import vitoravelar.academy.exceptions.ResourceNotFoundException;
+import vitoravelar.academy.exception.ResourceNotFoundException;
 import vitoravelar.academy.models.Equipment;
 import vitoravelar.academy.repository.EquipmentRepository;
 

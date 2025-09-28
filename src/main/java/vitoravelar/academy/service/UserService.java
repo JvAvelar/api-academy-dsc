@@ -3,7 +3,7 @@ package vitoravelar.academy.service;
 import org.springframework.stereotype.Service;
 import vitoravelar.academy.dto.UserDTO;
 import vitoravelar.academy.dto.UserUpdateDTO;
-import vitoravelar.academy.exceptions.ResourceNotFoundException;
+import vitoravelar.academy.exception.ResourceNotFoundException;
 import vitoravelar.academy.models.User;
 import vitoravelar.academy.repository.UserRepository;
 

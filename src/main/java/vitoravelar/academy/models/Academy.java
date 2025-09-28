@@ -2,6 +2,7 @@ package vitoravelar.academy.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import vitoravelar.academy.dto.AcademyDTO;
 
 import java.util.List;
 
@@ -33,5 +34,8 @@ public class Academy {
     @OneToMany(mappedBy = "academy")
     private List<Equipment> equipments;
 
+    public AcademyDTO toDTO(){
+        return new AcademyDTO();
+    }
 
 }

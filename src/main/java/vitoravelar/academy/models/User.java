@@ -35,7 +35,7 @@ public class User implements Serializable {
     private boolean latePayment = false;
 
     @ManyToOne
-    @Column(name = "academy", nullable = false)
+    @JoinColumn(name = "academy_id")
     private Academy academy;
 
     public User(UserDTO userDTO) {

@@ -24,7 +24,7 @@ public class Equipment {
     private Integer quantity;
 
     @ManyToOne
-    @Column(name = "academy", nullable = false)
+    @JoinColumn(name = "academy_id")
     private Academy academy;
 
     public Equipment(EquipmentDTO equipmentDTO ){
