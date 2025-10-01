@@ -42,7 +42,7 @@ public class AcademyController {
         return academyService.addAcademy(academyDTO);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public AcademyDTO updateAcademy(@PathVariable @Min(1) Long id, @Valid @RequestBody AcademyDTO academyDetails) {
         return academyService.updateAcademy(id, academyDetails);
     }

@@ -43,7 +43,7 @@ public class EquipmentController {
         return equipmentService.addEquipment(equipmentDTO);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public EquipmentDTO updateEquipment(@PathVariable @Min(1) Long id, @Valid @RequestBody EquipmentUpdateDTO equipmentDTO){
         return equipmentService.updateEquipment(id, equipmentDTO);
     }

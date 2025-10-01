@@ -19,7 +19,6 @@ import vitoravelar.academy.dto.UserDTO;
 import vitoravelar.academy.models.User;
 import vitoravelar.academy.repository.UserRepository;
 import vitoravelar.academy.security.JwtTokenProvider;
-import vitoravelar.academy.security.UserDetailsServiceImpl;
 
 @RestController
 @RequestMapping("/api/auth")
