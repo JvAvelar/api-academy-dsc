@@ -12,7 +12,7 @@ import vitoravelar.academy.service.EquipmentService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/academy/equipment")
+@RequestMapping(path = "/api/equipment")
 @Validated
 public class EquipmentController {
 
