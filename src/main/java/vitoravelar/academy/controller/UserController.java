@@ -12,7 +12,7 @@ import vitoravelar.academy.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/academy/user")
+@RequestMapping(path = "/api/user")
 @Validated
 public class UserController {
 

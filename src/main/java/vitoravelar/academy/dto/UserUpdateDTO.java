@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserUpdateDTO {
 
     @NotBlank(message = "O nome do usuário não pode estar vazio")
@@ -21,4 +18,19 @@ public class UserUpdateDTO {
     @NotNull(message = "A data de pagamento não pode estar nulo")
     private LocalDate paymentDate;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 }
