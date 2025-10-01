@@ -43,7 +43,7 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public UserDTO updateUser(@PathVariable @Min(1) Long id, @Valid @RequestBody UserUpdateDTO user) {
         return userService.updateUser(id, user);
     }
